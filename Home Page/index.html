@@ -50,6 +50,62 @@
             padding: 60px 0 100px;
         }
 
+        .contact-section {
+            padding: 80px 0 100px;
+            animation: fadeIn 0.8s ease-out 0.8s both;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 60px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-intro {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.95;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-icon {
+            font-size: 1.3rem;
+        }
+
         .about-section {
             padding: 80px 0;
             animation: fadeIn 0.8s ease-out 0.4s both;
@@ -266,6 +322,15 @@
                 width: 150px;
                 height: 150px;
             }
+
+            .contact-buttons {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .contact-btn {
+                justify-content: center;
+            }
         }
     </style>
 </head>
@@ -301,6 +366,26 @@
                     <span class="arrow">→</span>
                 </div>
                 <!-- Add more project cards here as needed -->
+            </div>
+        </section>
+        <section class="contact-section">
+            <h2 class="section-title">Let's Connect</h2>
+            <div class="contact-container">
+                <p class="contact-intro">Interested in working together? I'd love to hear from you.</p>
+                <div class="contact-buttons">
+                    <a href="mailto:igriesd@gmail.com" class="contact-btn email-btn">
+                        <span class="btn-icon">✉️</span>
+                        <span>Email Me</span>
+                    </a>
+                    <a href="https://www.linkedin.com/in/ian-griesdorn" target="_blank" rel="noopener noreferrer" class="contact-btn linkedin-btn">
+                        <span class="btn-icon">💼</span>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="resume.pdf" download class="contact-btn resume-btn">
+                        <span class="btn-icon">📄</span>
+                        <span>Download Resume</span>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
