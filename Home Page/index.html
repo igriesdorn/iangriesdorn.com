@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #0084ff 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .projects-section {
+            padding: 60px 0 100px;
+        }
+
+        .about-section {
+            padding: 80px 0;
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .about-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .profile-photo {
+            flex-shrink: 0;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .profile-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .about-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            animation: fadeIn 0.8s ease-out 0.6s both;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-card p {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .arrow {
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+
+        .project-card:hover .arrow {
+            opacity: 1;
+            transform: translateX(5px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .about-text {
+                text-align: center;
+            }
+
+            .profile-photo {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Ian Griesdorn</h1>
+            <p class="subtitle">Product Manager | Building Products People Love</p>
+        </header>
+
+        <section class="about-section">
+            <div class="about-container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="profile-photo">
+                        <img src="profile-photo.jpg" alt="Ian Griesdorn">
+                    </div>
+                    <div class="about-text">
+                        <p>I'm a Product Manager with a passion for creating meaningful products that solve real problems. With experience spanning multiple industries, I specialize in turning complex challenges into intuitive solutions that users love.</p>
+                        <p>My approach combines data-driven decision making with deep user empathy. I believe the best products are built when cross-functional teams are aligned around a shared vision and empowered to do their best work.</p>
+                        <p>When I'm not working on product strategy, you'll find me exploring new technologies, mentoring aspiring PMs, or diving into user research to uncover the next big opportunity.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="projects-section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card" onclick="window.location.href='./initiatives-dashboard/index.html'">
+                    <h3>Initiatives Dashboard</h3>
+                    <p>A comprehensive dashboard for tracking product initiatives, measuring impact, and aligning stakeholders across the organization.</p>
+                    <span class="arrow">→</span>
+                </div>
+                <!-- Add more project cards here as needed -->
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Ian Griesdorn. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            header.style.transform = `translateY(${scrolled * 0.5}px)`;
+            header.style.opacity = 1 - scrolled / 500;
+        });
+    </script>
+</body>
+</html>

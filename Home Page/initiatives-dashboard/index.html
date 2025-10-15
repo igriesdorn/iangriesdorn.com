@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Initiative Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            padding: 24px;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+        }
+
+        .dashboard {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 80px 1fr 200px 150px 80px;
+            gap: 16px;
+            padding: 16px 24px;
+            background-color: #f9fafb;
+            border-bottom: 1px solid #e5e7eb;
+            font-weight: 600;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        .initiative-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 200px 150px 80px;
+            gap: 16px;
+            padding: 16px 24px;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .initiative-row:last-child {
+            border-bottom: none;
+        }
+
+        .initiative-row:hover {
+            background-color: #f9fafb;
+        }
+
+        .priority-badge {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #dbeafe;
+            color: #1e40af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .initiative-name {
+            font-weight: 500;
+            color: #111827;
+            display: flex;
+            align-items: center;
+        }
+
+        .chevron {
+            margin-left: 8px;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        .owner, .due-date {
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+        }
+
+        .status-indicator {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        .status-green { background-color: #22c55e; }
+        .status-yellow { background-color: #eab308; }
+        .status-red { background-color: #ef4444; }
+
+        .status-icon {
+            color: white;
+            font-size: 20px;
+        }
+
+        .details {
+            padding: 16px 24px;
+            background-color: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+            display: none;
+        }
+
+        .details.expanded {
+            display: block;
+        }
+
+        .details h3 {
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .details p {
+            color: #374151;
+            line-height: 1.6;
+        }
+
+        .legend {
+            margin-top: 24px;
+            display: flex;
+            gap: 24px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.95);
+            justify-content: center;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Development Initiatives</h1>
+            <p class="subtitle">Sorted by priority - Click any initiative for details</p>
+        </div>
+
+        <div class="dashboard">
+            <div class="table-header">
+                <div>Priority</div>
+                <div>Initiative Name</div>
+                <div>Owner</div>
+                <div>Due Date</div>
+                <div>Status</div>
+            </div>
+
+            <div id="initiatives-container"></div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-dot status-green"></div>
+                <span>On Track</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot status-yellow"></div>
+                <span>At Risk</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot status-red"></div>
+                <span>Critical</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================================
+        // CUSTOMIZE YOUR DATA HERE
+        // ========================================
+        const initiatives = [
+            {
+                id: 1,
+                name: "Customer Portal Redesign",
+                priority: 1,
+                status: "green",        // Options: "green", "yellow", "red"
+                owner: "Sarah Chen",
+                dueDate: "2025-11-15",  // Format: YYYY-MM-DD
+                details: "Phase 2 development on track. User testing completed with positive feedback. Final UI components in review."
+            },
+            {
+                id: 2,
+                name: "Mobile App v3.0",
+                priority: 2,
+                status: "yellow",
+                owner: "Michael Rodriguez",
+                dueDate: "2025-12-01",
+                details: "Backend integration experiencing minor delays. API changes required additional testing cycles. Resource allocation adjusted to maintain timeline."
+            },
+            {
+                id: 3,
+                name: "Data Analytics Platform",
+                priority: 3,
+                status: "green",
+                owner: "Emily Watson",
+                dueDate: "2026-01-30",
+                details: "Requirements gathering complete. Architecture design approved. Development team onboarded and sprint planning finalized."
+            },
+            {
+                id: 4,
+                name: "Security Compliance Upgrade",
+                priority: 4,
+                status: "red",
+                owner: "David Kim",
+                dueDate: "2025-10-31",
+                details: "Critical blocker: Third-party vendor audit delayed. Need executive escalation. Risk of missing compliance deadline."
+            },
+            {
+                id: 5,
+                name: "Payment Gateway Integration",
+                priority: 5,
+                status: "green",
+                owner: "Lisa Martinez",
+                dueDate: "2025-11-30",
+                details: "Integration testing successful. Documentation complete. Preparing for production deployment next week."
+            }
+        ];
+        // ========================================
+        // END CUSTOMIZATION SECTION
+        // ========================================
+
+        //Leaving icons blank for now, will come back to this later when I can figure out how to better format what I like
+            function getStatusIcon(status) {
+            switch(status) {
+                case 'green': return '';
+                case 'yellow': return '';
+                case 'red': return '';
+                default: return '';
+            }
+        }
+
+        function formatDate(dateString) {
+            // Split the date string to avoid timezone issues
+            const [year, month, day] = dateString.split('-');
+            const date = new Date(year, month - 1, day);
+            return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+        }
+
+        function toggleDetails(id) {
+            const details = document.getElementById(`details-${id}`);
+            const chevron = document.getElementById(`chevron-${id}`);
+            
+            if (details.classList.contains('expanded')) {
+                details.classList.remove('expanded');
+                chevron.textContent = '▼';
+            } else {
+                details.classList.add('expanded');
+                chevron.textContent = '▲';
+            }
+        }
+
+        function renderInitiatives() {
+            const container = document.getElementById('initiatives-container');
+            container.innerHTML = '';
+
+            initiatives.forEach(initiative => {
+                const rowHTML = `
+                    <div>
+                        <div class="initiative-row" onclick="toggleDetails(${initiative.id})">
+                            <div>
+                                <div class="priority-badge">${initiative.priority}</div>
+                            </div>
+                            <div class="initiative-name">
+                                ${initiative.name}
+                                <span class="chevron" id="chevron-${initiative.id}">▼</span>
+                            </div>
+                            <div class="owner">${initiative.owner}</div>
+                            <div class="due-date">${formatDate(initiative.dueDate)}</div>
+                            <div>
+                                <div class="status-indicator status-${initiative.status}">
+                                    <span class="status-icon">${getStatusIcon(initiative.status)}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="details" id="details-${initiative.id}">
+                            <h3>Current Status Details</h3>
+                            <p>${initiative.details}</p>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += rowHTML;
+            });
+        }
+
+        // Initialize the dashboard
+        renderInitiatives();
+    </script>
+</body>
+</html>
