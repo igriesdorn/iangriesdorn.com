@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Own Up Account Page Refresh - Case Study</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #0084ff 100%);
+            min-height: 100vh;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 40px 0 20px;
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .back-button:hover {
+            opacity: 1;
+        }
+
+        header {
+            padding: 40px 0 60px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .project-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 1.3rem;
+            font-weight: 300;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 40px 0 60px;
+            animation: fadeIn 0.8s ease-out 0.2s both;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 30px;
+            animation: fadeIn 0.8s ease-out 0.4s both;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+
+        li {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 12px;
+            opacity: 0.95;
+        }
+
+        .highlight-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-left: 4px solid rgba(255, 255, 255, 0.5);
+            padding: 20px 25px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .key-takeaway {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 0 40px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+
+            section {
+                padding: 30px 25px;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-button">← Back to Portfolio</a>
+        
+        <header>
+            <div class="project-tag">CASE STUDY</div>
+            <h1>Own Up Account Page Refresh</h1>
+            <p class="subtitle">How data-driven A/B testing and customer-centric design increased shopper conversion rates by 144%</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">144%</span>
+                <span class="stat-label">Increase in Conversion Rate</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">12 hrs</span>
+                <span class="stat-label">Faster Time to First Connection</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">2 Months</span>
+                <span class="stat-label">Testing & Iteration Period</span>
+            </div>
+        </div>
+
+        <section>
+            <h2>Company Overview</h2>
+            <p>Own Up is a mortgage concierge shopping service that shops against a network of lenders on behalf of customers, ensuring they get the best rate possible. By acting as an advocate for homebuyers, Own Up simplifies the complex mortgage shopping process.</p>
+        </section>
+
+        <section>
+            <h2>The Challenge</h2>
+            <p>Customers navigating the Own Up account page were experiencing confusion about their next steps in the mortgage process. Many shoppers were uncertain whether they should contact our Home Advisors (our preferred conversion metric) or reach out to lenders directly.</p>
+            
+            <div class="highlight-box">
+                <strong>Core Problem:</strong> The existing account page lacked clear guidance and personalization, resulting in customer uncertainty and suboptimal conversion rates.
+            </div>
+
+            <p>This confusion was creating friction in the customer journey and preventing shoppers from getting the personalized guidance that would help them secure the best mortgage rate.</p>
+        </section>
+
+        <section>
+            <h2>My Role</h2>
+            <p>As the lead Product Manager on this initiative, I coordinated efforts across multiple teams including sales, operations, design, engineering, and product. My responsibilities included:</p>
+            <ul>
+                <li>Leading user research and data analysis to identify pain points</li>
+                <li>Defining the product vision and strategy</li>
+                <li>Prioritizing features using impact vs. effort scoring</li>
+                <li>Coordinating A/B testing methodology and analysis</li>
+                <li>Facilitating cross-functional collaboration and alignment</li>
+                <li>Driving iterative improvements based on test results</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Discovery & Research</h2>
+            <p>To deeply understand the problem, I employed a multi-faceted research approach:</p>
+
+            <h3>User Research</h3>
+            <p>Conducted in-depth user interviews with customers at various stages of the mortgage shopping process to understand their needs, frustrations, and decision-making patterns.</p>
+
+            <h3>Session Recording Analysis</h3>
+            <p>Analyzed user session recordings of traffic on the existing account page to identify behavioral patterns, points of confusion, and areas where users were getting stuck.</p>
+
+            <h3>Data Analysis</h3>
+            <p>Studied quantitative data inside of Looker to identify trends in user behavior, conversion patterns, and drop-off points in the customer journey.</p>
+
+            <div class="highlight-box">
+                <strong>Initial Hypothesis:</strong> We believed that by simplifying navigation and providing clearer guidance, we could increase shopper conversion rates by 30%.
+            </div>
+        </section>
+
+        <section>
+            <h2>The Solution</h2>
+            <p>Based on our research insights, we redesigned the account page with several key improvements:</p>
+
+            <h3>Simplified Navigation</h3>
+            <p>Streamlined the page structure to make the customer journey more intuitive and reduce cognitive load.</p>
+
+            <h3>Contextual Side Menu</h3>
+            <p>Introduced a side menu that provided additional context and guidance for various tools and features available to shoppers.</p>
+
+            <h3>Personalized Home Advisor Matching</h3>
+            <p>Implemented a personalization feature that matched each borrower with a custom-selected Home Advisor best suited to their specific needs and situation.</p>
+
+            <h3>Feature Prioritization</h3>
+            <p>Used a standard impact vs. effort scoring algorithm to determine which features were most critical for shoppers in our MVP, and which could be iterated on later. This ensured we were delivering maximum value quickly while maintaining an agile development approach.</p>
+        </section>
+
+        <section>
+            <h2>A/B Testing Approach</h2>
+            <p>Rather than a single large test, we ran multiple A/B tests over a two-month period. This iterative approach allowed us to:</p>
+            <ul>
+                <li>Test individual features and their impact</li>
+                <li>Quickly identify what was working and double down on those features</li>
+                <li>Course-correct on elements that weren't performing as expected</li>
+                <li>Build momentum and confidence with stakeholders through incremental wins</li>
+            </ul>
+
+            <h3>Metrics Tracked</h3>
+            <p>Beyond conversion rate, we measured interactions with various tools and modals provided to end users. This helped us understand customer intent and which features were driving the most value.</p>
+
+            <div class="highlight-box">
+                <strong>Surprising Finding:</strong> We discovered a significantly higher conversion rate among customers who clicked to see more details about their Home Advisor. This insight led us to invest more time and resources into enhancing this feature.
+            </div>
+        </section>
+
+        <section>
+            <h2>Results & Impact</h2>
+            
+            <h3>Primary Metrics</h3>
+            <p><strong>144% increase in shopper conversion rate</strong> – Far exceeding our initial 30% hypothesis, demonstrating the power of customer-centric design and iterative testing.</p>
+            
+            <p><strong>12-hour reduction in mean time to first connection</strong> – Customers connected with their Home Advisor half a day faster, accelerating their mortgage shopping journey.</p>
+
+            <h3>Secondary Benefits</h3>
+            <ul>
+                <li><strong>Increased customer satisfaction</strong> – Shoppers reported feeling more confident and supported throughout the process</li>
+                <li><strong>Growth in monthly recurring revenue</strong> – The improved conversion rates directly contributed to business growth</li>
+                <li><strong>Enhanced personalization capabilities</strong> – The Home Advisor matching feature became a key differentiator for Own Up</li>
+            </ul>
+
+            <h3>What Drove Success?</h3>
+            <p>The exceptional results were driven by our tight, agile approach to A/B testing and iteration. By quickly identifying what was working and investing more in those areas, we were able to compound our wins and exceed expectations.</p>
+        </section>
+
+        <section>
+            <h2>Key Learnings</h2>
+            
+            <div class="key-takeaway">
+                <h3>Voice of the Customer</h3>
+                <p>This project reinforced the critical importance of always incorporating the voice of the customer into every project I lead. Ultimately, the products I build are for their benefit, and by prioritizing their needs through research, testing, and iteration, I can consistently achieve results that match or exceed targets.</p>
+            </div>
+
+            <p>Additional insights that shaped my approach to future projects:</p>
+            <ul>
+                <li><strong>Iterative testing beats big bang launches</strong> – Multiple smaller tests allowed us to learn faster and optimize continuously</li>
+                <li><strong>Personalization drives engagement</strong> – Customers respond positively when experiences are tailored to their specific needs</li>
+                <li><strong>Small details matter</strong> – The Home Advisor detail view seemed minor, but became a key conversion driver</li>
+                <li><strong>Cross-functional collaboration is essential</strong> – Success required alignment and expertise from sales, operations, design, engineering, and product teams</li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Ian Griesdorn. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
